@@ -8,8 +8,10 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import Icon from '@/components/ui/icon';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
+  const navigate = useNavigate();
   const [balance] = useState(125847.50);
   const [selectedCard, setSelectedCard] = useState(0);
 
@@ -29,10 +31,10 @@ const Index = () => {
   ];
 
   const quickActions = [
-    { label: 'Перевод', icon: 'Send', gradient: 'gradient-purple' },
-    { label: 'Платёж', icon: 'CreditCard', gradient: 'gradient-blue' },
-    { label: 'Пополнить', icon: 'Plus', gradient: 'gradient-orange' },
-    { label: 'История', icon: 'Clock', gradient: 'gradient-purple' }
+    { label: 'Перевод', icon: 'Send', gradient: 'gradient-purple', action: () => {} },
+    { label: 'Платёж', icon: 'CreditCard', gradient: 'gradient-blue', action: () => navigate('/payments') },
+    { label: 'Пополнить', icon: 'Plus', gradient: 'gradient-orange', action: () => {} },
+    { label: 'История', icon: 'Clock', gradient: 'gradient-purple', action: () => {} }
   ];
 
   return (
@@ -73,6 +75,7 @@ const Index = () => {
             {quickActions.map((action, idx) => (
               <Button 
                 key={idx}
+                onClick={action.action}
                 className={`${action.gradient} h-24 rounded-2xl flex flex-col gap-2 card-hover border-0 text-white font-semibold`}
               >
                 <Icon name={action.icon} className="h-6 w-6" />
